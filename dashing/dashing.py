@@ -83,10 +83,11 @@ TBox = namedtuple("TBox", "t x y w h")
 
 
 class Tile(object):
-    def __init__(self, title=None, border_color=None, color=0):
+    def __init__(self, title=None, border_color=None, color=0, weight=1):
         self.title = title
         self.color = color
         self.border_color = border_color
+        self.weight = weight
 
     def _display(self, tbox, parent):
         """Render current tile
@@ -176,6 +177,12 @@ class Split(Tile):
     def __init__(self, *items, **kw):
         super(Split, self).__init__(**kw)
         self.items = items
+        self.weights = []
+        weights_sum = 0
+        for i in self.items:
+            weights_sum += i.weight
+        for i in self.items:
+            self.weights.append(i.weight / weights_sum)
 
     def _display(self, tbox, parent):
         """Render current tile and its items. Recurse into nested splits
@@ -196,12 +203,14 @@ class Split(Tile):
 
         x = tbox.x
         y = tbox.y
-        for i in self.items:
+        for idx, i in enumerate(self.items):
             i._display(TBox(tbox.t, x, y, item_width, item_height), self)
             if isinstance(self, VSplit):
-                x += item_height
+                # x += item_height
+                x += tbox.h * self.weights[idx]
             else:
-                y += item_width
+                # y += item_width
+                y += tbox.w * self.weights[idx]
 
         # Fill leftover area
         if isinstance(self, VSplit):
