@@ -1,23 +1,23 @@
 # -*- coding: utf-8 -*-
-# Dashing - Released under LGPLv3, see LICENSE
+# termdash - Released under LGPLv3, see LICENSE
 
 """
-Dashing allows to quickly create terminal-based dashboards in Python.
+termdash allows to quickly create terminal-based dashboards in Python.
 
 It focuses on practicality over completeness. If you want to have complete control
 over every character on the screen, use ncurses or similar.
 
-Dashing automatically fills the screen with "tiles".
+termdash automatically fills the screen with "tiles".
 
 There are 2 type of "container" tiles that allow vertical and horizontal splitting
-called VSplit and HSplit. Dashing scales them based on the screen size.
+called VSplit and HSplit. termdash scales them based on the screen size.
 
 Any tile passed as argument at init time will be nested using the .items attribute
 
 .items can be used to access, add or remove nested tiles.
 
-You can easily extend Dashing with new tile types. Subclass :class:`Tile`, implement
-__init__ and _display. See dashing.py for examples.
+You can easily extend termdash with new tile types. Subclass :class:`Tile`, implement
+__init__ and _display. See termdash.py for examples.
 
 The other types of tiles are:
     - :class:`Text` - simple text
@@ -231,7 +231,7 @@ class HSplit(Split):
 class Text(Tile):
     """A multi-line text box. Example::
 
-        Text('Hello World, this is dashing.', border_color=2),
+        Text('Hello World, this is termdash.', border_color=2),
 
     """
     def __init__(self, text, color=0, *args, **kw):
