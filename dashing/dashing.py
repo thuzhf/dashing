@@ -194,23 +194,20 @@ class Split(Tile):
             self._fill_area(tbox, " ")
             return
 
-        if isinstance(self, VSplit):
-            item_height = tbox.h // len(self.items)
-            item_width = tbox.w
-        else:
-            item_height = tbox.h
-            item_width = tbox.w // len(self.items)
-
         x = tbox.x
         y = tbox.y
         for idx, i in enumerate(self.items):
+            if isinstance(self, VSplit):
+                item_height = int(tbox.h * self.weights[idx])
+                item_width = tbox.w
+            else:
+                item_height = tbox.h
+                item_width = int(tbox.w * self.weights[idx])
             i._display(TBox(tbox.t, x, y, item_width, item_height), self)
             if isinstance(self, VSplit):
-                # x += item_height
-                x += tbox.h * self.weights[idx]
+                x += item_height
             else:
-                # y += item_width
-                y += tbox.w * self.weights[idx]
+                y += item_width
 
         # Fill leftover area
         if isinstance(self, VSplit):
