@@ -2,7 +2,7 @@
 from time import sleep, time
 import math
 
-from dashing import *
+from termdash import *
 
 if __name__ == '__main__':
 

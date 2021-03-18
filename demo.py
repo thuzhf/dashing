@@ -2,7 +2,7 @@
 from time import sleep, time
 import math
 
-from dashing import *
+from termdash import *
 
 if __name__ == '__main__':
 
@@ -34,7 +34,7 @@ if __name__ == '__main__':
                 )
             ),
             VSplit(
-                Text('Hello World,\nthis is dashing.', border_color=2),
+                Text('Hello World,\nthis is termdash.', border_color=2),
                 Log(title='logs', border_color=5),
                 VChart(border_color=2, color=2),
                 HChart(border_color=2, color=2),
